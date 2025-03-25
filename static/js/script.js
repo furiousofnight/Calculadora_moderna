@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (valor === '=') {
                 try {
                     expressão = expressão.replace('√', 'Math.sqrt');
+                    expressão = expressão.replace(/x/g, '*'); // Corrigindo multiplicação "x" para o operador "*"
                     const resultado = eval(expressão);
                     display.value = resultado;
                     expressão = resultado.toString();
