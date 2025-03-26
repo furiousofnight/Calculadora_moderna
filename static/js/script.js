@@ -11,9 +11,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 display.value = '0';
             } else if (valor === '=') {
                 try {
-                    // Correção: substitui todas as ocorrências da raiz quadrada adequadamente
                     expressão = expressão.replace(/√\(/g, 'Math.sqrt(');
-                    expressão = expressão.replace(/x/g, '*'); // Corrigindo multiplicação "x" para o operador "*"
+                    expressão = expressão.replace(/x/g, '*');
+
+                    // Corrigindo automaticamente qualquer falta de ")"
+                    const abreParenteses = (expressão.match(/\(/g) || []).length;
+                    const fechaParenteses = (expressão.match(/\)/g) || []).length;
+                    const parentesesFaltantes = abreParenteses - fechaParenteses;
+                    expressão += ")".repeat(Math.max(0, parentesesFaltantes));
+
                     const resultado = eval(expressão);
                     display.value = resultado;
                     expressão = resultado.toString();
