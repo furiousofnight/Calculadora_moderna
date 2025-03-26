@@ -11,7 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 display.value = '0';
             } else if (valor === '=') {
                 try {
-                    expressão = expressão.replace('√', 'Math.sqrt');
+                    // Correção: substitui todas as ocorrências da raiz quadrada adequadamente
+                    expressão = expressão.replace(/√\(/g, 'Math.sqrt(');
                     expressão = expressão.replace(/x/g, '*'); // Corrigindo multiplicação "x" para o operador "*"
                     const resultado = eval(expressão);
                     display.value = resultado;
