@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Converte expressões como "25%1000" para "(25/100)*1000"
                     expressão = expressão.replace(/(\d+(\.\d+)?)%(\d+(\.\d+)?)/g, '($1/100)*$3');
 
-                    // Avalie a expressão final
+                    // Avalia a expressão final
                     const resultado = eval(expressão);
                     display.value = resultado;
                     expressão = resultado.toString();
@@ -39,6 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (valor === '√') {
                 expressão += '√(';
                 display.value = expressão;
+
+            } else if (valor === '⌫') {
+                expressão = expressão.slice(0, -1); // remove o último caractere digitado
+                display.value = expressão || '0';  // exibe 0 se expressão estiver vazia
 
             } else {
                 if (display.value === '0' && valor !== '.') {
